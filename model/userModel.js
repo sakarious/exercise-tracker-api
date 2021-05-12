@@ -1,6 +1,7 @@
 const mongodb = require('mongodb')
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const {modelSchema} = require('./exerciseModel')
 
 
   const userSchema = Schema({
@@ -13,11 +14,9 @@ const Schema = mongoose.Schema
       type: Number,
       default: 0
     },
-    logs :[
+    log :[
         {
-        description: String,
-        duration: Number,
-        date: String
+        modelSchema
       }
     ]
   })

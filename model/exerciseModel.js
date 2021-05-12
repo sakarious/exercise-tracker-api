@@ -3,24 +3,12 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const exerciseSchema = Schema({
-  _id : {
-    type: Schema.Types.ObjectId,
-    ref: 'User'
-  },
-  count : {
-    type: Number,
-    default: 0
-  },
-  logs : [
-    {
     description: String,
     duration: Number,
-    date: {
-      type: Date,
-      default: new Date()
-    }
-  }
-  ]
+    date: Date
 })
 
-module.exports = mongoose.model('Exercise', exerciseSchema)
+let exerciseModel = mongoose.model('Exercise', exerciseSchema)
+let modelSchema = exerciseSchema
+
+module.exports = {exerciseModel, modelSchema}
