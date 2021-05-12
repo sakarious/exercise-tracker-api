@@ -31,16 +31,33 @@ module.exports = class exerciseModel {
        try{
             let response = await exerciseService.getAllUsers()
 
-            let _id = response._id
-            let username = response.username
-            let __v = response.__v
-
-            //console.log([_id, username, __v]);
-            
             res.json(response)
 
         } catch (err) {
             return err.message
         }
+   }
+
+   static async addExercise(req, res){
+       try{
+           let id = req.params.id
+           let description = req.body.description
+           let duration = parseInt(req.body.duration)
+           let date = (req.body.date) ? new Date(req.body.date).toISOString().substring(0, 10) : new Date().toISOString(0, 10)
+
+           let response = await exerciseService.addExercise(id, description, duration, date)
+
+           let result = {}
+           result['_id'] = await response._id
+           result['username'] = await response.username
+           result['date'] = new Date(date).toDateString()
+           result['duration'] = duration
+           result['description'] = description
+
+           res.json({"_id" : result._id, "username" : result.username, "date" : result.date, "duration" : result.duration, "description" : result.description})
+
+       }catch(err) {
+           res.send(err.message)
+       }
    }
 }

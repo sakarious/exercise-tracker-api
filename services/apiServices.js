@@ -35,4 +35,17 @@ module.exports = class exerciseService {
             return err.message
         }
     }
+
+    static async addExercise(id, description, duration, date){
+
+        let newExercise = await new exerciseModel({
+            description,
+            duration,
+            date
+        })
+
+        let updatedUser = await User.findByIdAndUpdate(id, { $push: {log: newExercise}, $inc: {count: 1}}, {new: true})
+
+        return updatedUser
+    }
 }

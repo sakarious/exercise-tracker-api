@@ -16,4 +16,9 @@ router.get('/users', (req, res) => {
     exerciseController.getAllUsers(req, res)
 })
 
+//POST to /api/users/:_id/exercises with form data description, duration, and optionally date. If no date is supplied, the current date will be used.
+router.post('/users/:id/exercises', (req, res) => {
+    exerciseController.addExercise(req, res)
+})
+
 module.exports = router

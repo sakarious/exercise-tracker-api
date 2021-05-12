@@ -1,7 +1,6 @@
-const mongodb = require('mongodb')
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const {modelSchema} = require('./exerciseModel')
+const { modelSchema } = require('./exerciseModel')
 
 
   const userSchema = Schema({
@@ -15,9 +14,7 @@ const {modelSchema} = require('./exerciseModel')
       default: 0
     },
     log :[
-        {
         modelSchema
-      }
     ]
   })
 
