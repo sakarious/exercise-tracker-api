@@ -6,4 +6,14 @@ module.exports = class exerciseModel {
 
         res.json({response});
    }
+
+   static async addNewUser(req, res) {
+       let newUsername = req.body.username
+       let response = await exerciseService.createUser(newUsername)
+
+       let username = await response.username
+       let _id = await response._id
+
+       res.json({username, _id})
+   }
 }
