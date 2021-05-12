@@ -65,6 +65,38 @@ module.exports = class exerciseModel {
        let id = req.params.id
        let response = await exerciseService.getUserLog(id)
 
-       res.json(response)
+       let result = await response
+
+       let from = req.query.from
+       let to = req.query.to
+
+       if(from || to) {
+           let fromDate = new Date(0)
+           let toDate = new Date()
+
+           if(from){
+               fromDate = new Date(from)
+           }
+
+           if(to){
+               toDate = new Date(to)
+           }
+
+           fromDate = fromDate.getTime()
+           toDate = toDate.getTime()
+
+           result.log = result.log.filter(exercise => {
+               let exerciseDate = new Date(exercise.date).getTime
+
+               return exerciseDate >= fromDate && exerciseDate <= toDate
+           })
+       }
+
+        let limit = req.query.limit
+       if(limit){
+           result.log = result.log.slice(0, limit)
+       }
+
+       res.json(result)
    }
 }
