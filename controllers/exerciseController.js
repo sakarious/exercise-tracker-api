@@ -67,32 +67,34 @@ module.exports = class exerciseModel {
 
        let result = await response
 
-       let from = req.query.from
-       let to = req.query.to
+       let fromdate = req.query.from
+       let todate = req.query.to
 
-       if(from || to) {
+       if(fromdate || todate) {
            let fromDate = new Date(0)
            let toDate = new Date()
 
-           if(from){
-               fromDate = new Date(from)
+           if(fromdate){
+               fromDate = new Date(fromdate)
            }
 
-           if(to){
-               toDate = new Date(to)
+           if(todate){
+               toDate = new Date(todate)
            }
 
            fromDate = fromDate.getTime()
            toDate = toDate.getTime()
 
+           console.log({from: fromDate, to: toDate});
+
            result.log = result.log.filter(exercise => {
-               let exerciseDate = new Date(exercise.date).getTime
+               let exerciseDate = new Date(exercise.date).getTime()
 
                return exerciseDate >= fromDate && exerciseDate <= toDate
            })
        }
 
-        let limit = req.query.limit
+        let limit = parseInt(req.query.limit)
        if(limit){
            result.log = result.log.slice(0, limit)
        }
