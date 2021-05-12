@@ -26,4 +26,21 @@ module.exports = class exerciseModel {
         }
     
    }
+
+   static async getAllUsers(req, res) {
+       try{
+            let response = await exerciseService.getAllUsers()
+
+            let _id = response._id
+            let username = response.username
+            let __v = response.__v
+
+            //console.log([_id, username, __v]);
+            
+            res.json(response)
+
+        } catch (err) {
+            return err.message
+        }
+   }
 }

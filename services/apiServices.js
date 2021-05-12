@@ -24,4 +24,15 @@ module.exports = class exerciseService {
             return err.message
         }
     }
+
+    static async getAllUsers(){
+        try{
+
+            return User.find({}, {count: 0, log: 0})
+            //return allUsers
+
+        }catch(err){
+            return err.message
+        }
+    }
 }
