@@ -21,4 +21,10 @@ router.post('/users/:id/exercises', (req, res) => {
     exerciseController.addExercise(req, res)
 })
 
+//GET request to /api/users/:_id/logs to retrieve a full exercise log of any user.
+//(/api/users/:_id/logs) returns an object with a count property representing the number of exercises returned.
+router.get('/users/:id/logs', (req, res) => {
+    exerciseController.getUserLog(req, res)
+})
+
 module.exports = router

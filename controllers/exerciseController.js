@@ -60,4 +60,11 @@ module.exports = class exerciseModel {
            res.send(err.message)
        }
    }
+
+   static async getUserLog(req, res){
+       let id = req.params.id
+       let response = await exerciseService.getUserLog(id)
+
+       res.json(response)
+   }
 }

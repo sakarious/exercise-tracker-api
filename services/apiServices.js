@@ -48,4 +48,9 @@ module.exports = class exerciseService {
 
         return updatedUser
     }
+
+    static async getUserLog(id){
+        let response = await User.findById(id, {'__v' : 0, 'log._id' : 0})
+        return response
+    }
 }
